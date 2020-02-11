@@ -1,4 +1,3 @@
-
 # BEGIN WordPress
 # Las directivas (líneas) entre `BEGIN WordPress` y `END WordPress` se generan dinámicamente
 # , y solo se deberían modificar mediante filtros de WordPress.
