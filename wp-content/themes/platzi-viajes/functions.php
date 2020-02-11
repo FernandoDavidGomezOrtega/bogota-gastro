@@ -21,13 +21,44 @@ function add_role_viajero()
 // Add the simple_role.
 add_action('init', 'add_role_viajero');
 
-function add_role_prueba()
+// add post type
+function viajes_init()
 {
-    remove_role('prueba');
+    $labels = array(
+        'name' => 'Viajes',
+        'singular_name' => 'Viaje',
+        'menu_name' => 'Viajes',
+    );
+    $args = array(
+      'labels' => $labels,
+        'description' => 'Viajes de Bogotá Gastro',
+        'public' => true,
+        'publicly_queryable' => true,
+        'show_ui' => true,
+        'show_in_rest' => true,
+        'show_in_menu' => true,
+        'query_var' => true,
+        'rewrite' => array('slug' => 'viaje'),
+        'capability_type' => 'post',
+        'has_archive' => true,
+        'hierarchical' => false,
+        'menu_position' => null,
+        'menu_icon' => 'dashicons-admin-multisite',
+        'supports' => array('title', 'editor', 'author', 'thumbnail'),
+    );
+
+    register_post_type('viaje', $args);
 }
+
+add_action('init', 'viajes_init');
+
+// function add_role_prueba()
+// {
+//     remove_role('prueba');
+// }
  
-// Add the simple_role.
-add_action('init', 'add_role_prueba');
+// // Add the simple_role.
+// add_action('init', 'add_role_prueba');
 
 if (function_exists('acf_add_local_field_group')):
 
@@ -179,3 +210,57 @@ if (function_exists('acf_add_local_field_group')):
   ));
   
   endif;
+
+  // para mostrar los custom fields desde la api
+  add_action('rest_api_init', 'register_custom_fields');
+
+function register_custom_fields()
+{
+    register_rest_field(
+        'viaje',
+        'destino',
+        array(
+            'get_callback' => 'show_fields'
+        )
+    );
+    register_rest_field(
+        'viaje',
+        'vacunas_obligatorias',
+        array(
+            'get_callback' => 'show_fields'
+        )
+    );
+    register_rest_field(
+        'viaje',
+        'vacunas_recomendadas',
+        array(
+            'get_callback' => 'show_fields'
+        )
+    );
+    register_rest_field(
+        'viaje',
+        'transporte_local',
+        array(
+            'get_callback' => 'show_fields'
+        )
+    );
+    register_rest_field(
+        'viaje',
+        'peligrosidad',
+        array(
+            'get_callback' => 'show_fields'
+        )
+    );
+    register_rest_field(
+        'viaje',
+        'moneda_local',
+        array(
+            'get_callback' => 'show_fields'
+        )
+    );
+}
+
+function show_fields($object, $field_name, $request)
+{
+    return get_post_meta($object[ 'id' ], $field_name, true);
+}
