@@ -71,7 +71,7 @@ function viajes_init()
     register_post_type('viaje', $args);
 }
 
-add_action('init', 'rutas_init');
+add_action('init', 'viajes_init');
 
 /****************CPT RUTAS***********************************/
 function rutas_init()
