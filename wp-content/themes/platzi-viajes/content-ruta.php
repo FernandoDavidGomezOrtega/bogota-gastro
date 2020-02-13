@@ -7,6 +7,7 @@
 ?>
 <div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
   <?php
+
     do_action('storefront_single_post_top');
     /**
      * Functions hooked into storefront_single_post add_action
@@ -27,12 +28,14 @@
             if ('post' == get_post_type()) {
                 storefront_posted_on();
             }
+
             the_title(sprintf('<h2 class="alpha entry-title"><a href="%s" rel="bookmark">', esc_url(get_permalink())), '</a></h2>');
         }
       ?>
     </header><!-- .entry-header -->
     <aside class="entry-meta">
       <?php if ('post' == get_post_type()) : // Hide category and tag text for pages on Search.
+
       ?>
       <div class="vcard author">
         <?php
@@ -44,6 +47,7 @@
       <?php
       /* translators: used between list items, there is a space after the comma */
       $categories_list = get_the_category_list(__(', ', 'storefront'));
+
       if ($categories_list) : ?>
       <div class="cat-links">
         <?php
@@ -56,6 +60,7 @@
       <?php
       /* translators: used between list items, there is a space after the comma */
       $tags_list = get_the_tag_list('', __(', ', 'storefront'));
+
       if ($tags_list) : ?>
       <div class="tags-links">
         <?php
@@ -82,6 +87,7 @@
      * @hooked storefront_post_thumbnail - 10
      */
     do_action('storefront_post_content_before');
+
     the_content(
         sprintf(
           __('Continue reading %s', 'storefront'),
@@ -91,59 +97,30 @@
     /*************CUSTOM FIELDS********************************/
     $campos_viaje = get_post_custom($post_id);
         // var_dump($campos_viaje);
+
     ?>
     <div class="campos_viaje">
       <div class="campo_viaje">
-        <div class="viaje_label">
-          <strong>Destino: &nbsp;</strong>
+        <div class="ruta_label">
+          <strong>Dificultad: &nbsp;</strong>
         </div>
         <div class="viaje_valor">
-          <?php echo $campos_viaje['destino'][0]; ?>
+          <?php echo $campos_viaje['dificultad'][0]; ?>
         </div>
       </div>
       <div class="campo_viaje">
-        <div class="viaje_label">
-          <strong>Vacunas obligatorias: &nbsp;</strong>
+        <div class="ruta_label">
+          <strong>Tiempo: &nbsp;</strong>
         </div>
         <div class="viaje_valor">
-          <?php echo $campos_viaje['vacunas_obligatorias'][0]; ?>
-        </div>
-      </div>
-      <div class="campo_viaje">
-        <div class="viaje_label">
-          <strong>Vacunas Recomendadas: &nbsp;</strong>
-        </div>
-        <div class="viaje_valor">
-          <?php echo $campos_viaje['vacunas_recomendadas'][0]; ?>
-        </div>
-      </div>
-      <div class="campo_viaje">
-        <div class="viaje_label">
-          <strong>Peligrosidad: &nbsp;</strong>
-        </div>
-        <div class="viaje_valor">
-          <?php echo $campos_viaje['peligrosidad'][0]; ?>
-        </div>
-      </div>
-      <div class="campo_viaje">
-        <div class="viaje_label">
-          <strong>Transporte local: &nbsp;</strong>
-        </div>
-        <div class="viaje_valor">
-          <?php echo $campos_viaje['transporte_local'][0]; ?>
-        </div>
-      </div>
-      <div class="campo_viaje">
-        <div class="viaje_label">
-          <strong>Moneda Local: &nbsp;</strong>
-        </div>
-        <div class="viaje_valor">
-          <?php echo $campos_viaje['moneda_local'][0]; ?>
+          <?php echo $campos_viaje['tiempo'][0]; ?>
         </div>
       </div>
     </div>
     <?php
+
     do_action('storefront_post_content_after');
+
     wp_link_pages(array(
       'before' => '<div class="page-links">' . __('Pages:', 'storefront'),
       'after'  => '</div>',

@@ -1,218 +1,284 @@
 <?php
-function add_role_viajero()
-{
-    // remover role antes de poder cambiarlo
-    remove_role('viajero');
 
-    add_role(
-        'viajero',
-        'Viajero',
-        [
-            'read'         => true,
-            'edit_posts'   => true,
-            'upload_files' => true,
-            'publish_posts' => true,
-            'delete_posts' => true,
-            'edit_published_posts' => true,
-        ]
-    );
-}
- 
-// Add the simple_role.
-add_action('init', 'add_role_viajero');
-
-// add post type
-function viajes_init()
-{
-    $labels = array(
-        'name' => 'Viajes',
-        'singular_name' => 'Viaje',
-        'menu_name' => 'Viajes',
-    );
-    $args = array(
-      'labels' => $labels,
-        'description' => 'Viajes de Bogotá Gastro',
-        'public' => true,
-        'publicly_queryable' => true,
-        'show_ui' => true,
-        'show_in_rest' => true,
-        'show_in_menu' => true,
-        'query_var' => true,
-        'rewrite' => array('slug' => 'viaje'),
-        'capability_type' => 'post',
-        'has_archive' => true,
-        'hierarchical' => false,
-        'menu_position' => null,
-        'menu_icon' => 'dashicons-admin-multisite',
-        'supports' => array('title', 'editor', 'author', 'thumbnail'),
-    );
-
-    register_post_type('viaje', $args);
-}
-
-add_action('init', 'viajes_init');
-
-// function add_role_prueba()
+// function remove_role_prueba()
 // {
 //     remove_role('prueba');
 // }
  
 // // Add the simple_role.
-// add_action('init', 'add_role_prueba');
+// add_action('init', 'remove_role_prueba');
 
-if (function_exists('acf_add_local_field_group')):
 
-  acf_add_local_field_group(array(
-    'key' => 'group_5e41ce2b105b7',
-    'title' => 'Viaje',
-    'fields' => array(
-      array(
-        'key' => 'field_5e41ce350f91f',
-        'label' => 'Destino',
-        'name' => 'destino',
-        'type' => 'text',
-        'instructions' => '',
-        'required' => 0,
-        'conditional_logic' => 0,
-        'wrapper' => array(
-          'width' => '',
-          'class' => '',
-          'id' => '',
-        ),
-        'default_value' => '',
-        'placeholder' => '',
-        'prepend' => '',
-        'append' => '',
-        'maxlength' => '',
-      ),
-      array(
-        'key' => 'field_5e41ce430f920',
-        'label' => 'Vacunas obligatorias',
-        'name' => 'vacunas_obligatorias',
-        'type' => 'text',
-        'instructions' => '',
-        'required' => 0,
-        'conditional_logic' => 0,
-        'wrapper' => array(
-          'width' => '',
-          'class' => '',
-          'id' => '',
-        ),
-        'default_value' => '',
-        'placeholder' => '',
-        'prepend' => '',
-        'append' => '',
-        'maxlength' => '',
-      ),
-      array(
-        'key' => 'field_5e41ce500f921',
-        'label' => 'Vacunas recomendadas',
-        'name' => 'vacunas_recomendadas',
-        'type' => 'text',
-        'instructions' => '',
-        'required' => 0,
-        'conditional_logic' => 0,
-        'wrapper' => array(
-          'width' => '',
-          'class' => '',
-          'id' => '',
-        ),
-        'default_value' => '',
-        'placeholder' => '',
-        'prepend' => '',
-        'append' => '',
-        'maxlength' => '',
-      ),
-      array(
-        'key' => 'field_5e41ce680f922',
-        'label' => 'Transporte local',
-        'name' => 'transporte_local',
-        'type' => 'text',
-        'instructions' => '',
-        'required' => 0,
-        'conditional_logic' => 0,
-        'wrapper' => array(
-          'width' => '',
-          'class' => '',
-          'id' => '',
-        ),
-        'default_value' => '',
-        'placeholder' => '',
-        'prepend' => '',
-        'append' => '',
-        'maxlength' => '',
-      ),
-      array(
-        'key' => 'field_5e41ced60f923',
-        'label' => 'Peligrosidad',
-        'name' => 'peligrosidad',
-        'type' => 'select',
-        'instructions' => '',
-        'required' => 0,
-        'conditional_logic' => 0,
-        'wrapper' => array(
-          'width' => '',
-          'class' => '',
-          'id' => '',
-        ),
-        'choices' => array(
-          'baja' => 'Baja',
-          'media' => 'Media',
-          'alta' => 'Alta',
-          'muy alta' => 'Muy alta',
-        ),
-        'default_value' => array(
-        ),
-        'allow_null' => 0,
-        'multiple' => 0,
-        'ui' => 1,
-        'ajax' => 1,
-        'return_format' => 'value',
-        'placeholder' => '',
-      ),
-      array(
-        'key' => 'field_5e41cf870f924',
-        'label' => 'Moneda local',
-        'name' => 'moneda_local',
-        'type' => 'text',
-        'instructions' => '',
-        'required' => 0,
-        'conditional_logic' => 0,
-        'wrapper' => array(
-          'width' => '',
-          'class' => '',
-          'id' => '',
-        ),
-        'default_value' => '',
-        'placeholder' => '',
-        'prepend' => '',
-        'append' => '',
-        'maxlength' => '',
-      ),
-    ),
-    'location' => array(
-      array(
-        array(
-          'param' => 'post_type',
-          'operator' => '==',
-          'value' => 'viaje',
-        ),
-      ),
-    ),
-    'menu_order' => 0,
-    'position' => 'normal',
-    'style' => 'default',
-    'label_placement' => 'top',
-    'instruction_placement' => 'label',
-    'hide_on_screen' => '',
-    'active' => true,
-    'description' => '',
-  ));
-  
-  endif;
+/*******ADD ROLE VIAJERO************/
+// function add_role_viajero()
+// {
+//   remove_role('viajero');
+//     add_role(
+//         'viajero',
+//         'Viajero',
+//         [
+//             'read'                 => true,
+//             'edit_posts'           => true,
+//             'upload_files'         => true,
+//             'publish_posts'        => true,
+//          // 'delete_posts'         => true,
+//             'edit_published_posts' => true
+//         ]
+//     );
+// }
+//
+// // add the simple_role
+// add_action('init', 'add_role_viajero');
 
-  // para mostrar los custom fields desde la api
-  add_action('rest_api_init', 'register_custom_fields');
+/*************ADD CUSTOM POST TYPE********************************/
+function viajes_init()
+{
+    $labels = array(
+        'name'              => _x('Viajes', 'post type general name', 'your-plugin-textdomain'),
+        'singular_name'     => _x('Viajes', 'post type general name', 'your-plugin-textdomain'),
+        'menu_name'         => _x('Mis viajes', 'admin menu', 'your-plugin-textdomain'),
+        'name_admin_bar'    => _x('Viajes', 'add new on admin bar', 'your-plugin-textdomain'),
+        'add_new'           => _x('Añadir nuevo', 'viaje', 'your-plugin-textdomain'),
+        'add_new_item'      => __('Añadir nuevo viaje', 'your-plugin-textdomain'),
+        'new_item'          => __('Nuevo viaje', 'your-plugin-textdomain'),
+        'edit_item'         => __('Editar viaje', 'your-plugin-textdomain'),
+        'view_item'         => __('Ver viaje', 'your-plugin-textdomain'),
+        'all_items'         => __('Todos los viajes', 'your-plugin-textdomain'),
+        'search_items'      => __('Buscar viajes', 'your-plugin-textdomain'),
+        'parent_item_colon' => __('Viajes padre', 'your-plugin-textdomain'),
+        'not_found'         => __('No hemos encontrado viajes.', 'your-plugin-textdomain'),
+        'not_found_in_trash'=> __('No hemos encontrado viajes en la papelera', 'your-plugin-textdomain'),
+    );
+
+    $args = array(
+        'labels'            => $labels,
+        'description'       => __('Description', 'your-plugin-textdomain'),
+        'public'            => true,
+        'public_queryable'  => true,
+        'show_ui'           => true,
+        'show_in_rest'      => true,
+        'show_in_menu'      => true,
+        'query_var'         => true,
+        'rewrite'           => array( 'slug' => 'viaje' ),
+        'capability_type'   => 'post',
+        'has_archive'       => true,
+        'hierarchical'      => false,
+        'menu_position'     => null,
+        'menu_icon'         => 'dashicons-admin-multisite',
+        'supports'          => array( 'title', 'editor', 'author', 'thumbnail' )
+    );
+
+    register_post_type('viaje', $args);
+}
+
+add_action('init', 'rutas_init');
+
+/****************CPT RUTAS***********************************/
+function rutas_init()
+{
+    $labels = array(
+        'name'              => _x('Rutas', 'post type general name', 'your-plugin-textdomain'),
+        'singular_name'     => _x('Rutas', 'post type general name', 'your-plugin-textdomain'),
+        'menu_name'         => _x('Mis rutas', 'admin menu', 'your-plugin-textdomain'),
+        'name_admin_bar'    => _x('Rutas', 'add new on admin bar', 'your-plugin-textdomain'),
+        'add_new'           => _x('Añadir nueva', 'ruta', 'your-plugin-textdomain'),
+        'add_new_item'      => __('Añadir nueva ruta', 'your-plugin-textdomain'),
+        'new_item'          => __('Nueva ruta', 'your-plugin-textdomain'),
+        'edit_item'         => __('Editar ruta', 'your-plugin-textdomain'),
+        'view_item'         => __('Ver ruta', 'your-plugin-textdomain'),
+        'all_items'         => __('Todas las rutas', 'your-plugin-textdomain'),
+        'search_items'      => __('Buscar rutas', 'your-plugin-textdomain'),
+        'parent_item_colon' => __('Rutas padre', 'your-plugin-textdomain'),
+        'not_found'         => __('No hemos encontrado rutas.', 'your-plugin-textdomain'),
+        'not_found_in_trash'=> __('No hemos encontrado rutas en la papelera', 'your-plugin-textdomain'),
+    );
+
+    $args = array(
+        'labels'            => $labels,
+        'description'       => __('Description', 'your-plugin-textdomain'),
+        'public'            => true,
+        'public_queryable'  => true,
+        'show_ui'           => true,
+        'show_in_rest'      => true,
+        'show_in_menu'      => true,
+        'query_var'         => true,
+        'rewrite'           => array( 'slug' => 'ruta' ),
+        'capability_type'   => 'post',
+        'has_archive'       => true,
+        'hierarchical'      => false,
+        'menu_position'     => null,
+        'menu_icon'         => 'dashicons-admin-multisite',
+        'supports'          => array( 'title', 'editor', 'author', 'thumbnail' )
+    );
+
+    register_post_type('ruta', $args);
+}
+
+add_action('init', 'rutas_init');
+
+/********Advanced custom post type fields***********/
+
+if (function_exists("register_field_group")) {
+    register_field_group(array(
+        'id' => 'acf_viaje',
+        'title' => 'Viaje',
+        'fields' => array(
+            array(
+                'key' => 'field_5a66a9a00ec93',
+                'label' => 'Destino',
+                'name' => 'destino',
+                'type' => 'text',
+                'default_value' => '',
+                'placeholder' => '',
+                'prepend' => '',
+                'append' => '',
+                'formatting' => 'html',
+                'maxlength' => '',
+            ),
+            array(
+                'key' => 'field_5a66aa0adfe89',
+                'label' => 'Vacunas obligatorias',
+                'name' => 'vacunas_obligatorias',
+                'type' => 'text',
+                'default_value' => '',
+                'placeholder' => '',
+                'prepend' => '',
+                'append' => '',
+                'formatting' => 'html',
+                'maxlength' => '',
+            ),
+            array(
+                'key' => 'field_5a66aa2adfe8a',
+                'label' => 'Vacunas recomendadas',
+                'name' => 'vacunas_recomendadas',
+                'type' => 'text',
+                'default_value' => '',
+                'placeholder' => '',
+                'prepend' => '',
+                'append' => '',
+                'formatting' => 'html',
+                'maxlength' => '',
+            ),
+            array(
+                'key' => 'field_5a66aa55dfe8b',
+                'label' => 'Transporte local',
+                'name' => 'transporte_local',
+                'type' => 'text',
+                'default_value' => '',
+                'placeholder' => '',
+                'prepend' => '',
+                'append' => '',
+                'formatting' => 'html',
+                'maxlength' => '',
+            ),
+            array(
+                'key' => 'field_5a66aa6fdfe8c',
+                'label' => 'Peligrosidad',
+                'name' => 'peligrosidad',
+                'type' => 'select',
+                'choices' => array(
+                    'nula' => 'Nula',
+                    'baja' => 'Baja',
+                    'media' => 'Media',
+                    'alta' => 'Alta',
+                    'muy alta' => 'Muy Alta',
+                ),
+                'default_value' => '',
+                'allow_null' => 0,
+                'multiple' => 0,
+            ),
+            array(
+                'key' => 'field_5a66aaf4dfe8d',
+                'label' => 'Moneda local',
+                'name' => 'moneda_local',
+                'type' => 'text',
+                'default_value' => '',
+                'placeholder' => '',
+                'prepend' => '',
+                'append' => '',
+                'formatting' => 'html',
+                'maxlength' => '',
+            ),
+        ),
+        'location' => array(
+            array(
+                array(
+                    'param' => 'post_type',
+                    'operator' => '==',
+                    'value' => 'viaje',
+                    'order_no' => 0,
+                    'group_no' => 0,
+                ),
+            ),
+        ),
+        'options' => array(
+            'position' => 'normal',
+            'layout' => 'no_box',
+            'hide_on_screen' => array(
+            ),
+        ),
+        'menu_order' => 0,
+    ));
+}
+
+/******************Advanced Custom Post type RUTAS**************************/
+if (function_exists("register_field_group")) {
+    register_field_group(array(
+        'id' => 'acf_ruta',
+        'title' => 'Ruta',
+        'fields' => array(
+            array(
+                'key' => 'ruta_dificultad',
+                'label' => 'Dificultad',
+                'name' => 'dificultad',
+                'type' => 'select',
+                'choices' => array(
+                    'baja' => 'Baja',
+                    'media' => 'Media',
+                    'alta' => 'Alta',
+                    'experto' => 'Experto',
+                ),
+                'default_value' => '',
+                'allow_null' => 0,
+                'multiple' => 0,
+            ),
+            array(
+                'key' => 'ruta_tiempo',
+                'label' => 'Tiempo',
+                'name' => 'tiempo',
+                'type' => 'text',
+                'default_value' => '',
+                'placeholder' => '',
+                'prepend' => '',
+                'append' => '',
+                'formatting' => 'html',
+                'maxlength' => '',
+            ),
+        ),
+        'location' => array(
+            array(
+                array(
+                    'param' => 'post_type',
+                    'operator' => '==',
+                    'value' => 'ruta',
+                    'order_no' => 0,
+                    'group_no' => 0,
+                ),
+            ),
+        ),
+        'options' => array(
+            'position' => 'normal',
+            'layout' => 'no_box',
+            'hide_on_screen' => array(
+            ),
+        ),
+        'menu_order' => 0,
+    ));
+}
+
+/**************wp-rest-api-demo*****************/
+
+add_action('rest_api_init', 'register_custom_fields');
 
 function register_custom_fields()
 {
